@@ -6,4 +6,3 @@
 //
 
 #import "AUv3ExtensionExampleExtensionAudioUnit.h"
-#import "AUv3ExtensionExampleExtensionParameterAddresses.h"
