@@ -11,10 +11,6 @@
 #import <CoreAudioKit/AUViewController.h>
 #import <CoreMIDI/CoreMIDI.h>
 
-#import "AUv3ExtensionExampleExtensionAUProcessHelper.hpp"
-#import "AUv3ExtensionExampleExtensionDSPKernel.hpp"
-
-
 // Define parameter addresses.
 
 @interface AUv3ExtensionExampleExtensionAudioUnit ()
@@ -25,12 +21,12 @@
 @property (nonatomic, readonly) AUAudioUnitBus *outputBus;
 @end
 
+AUHostMusicalContextBlock _musicalContextBlock;
+AUMIDIOutputEventBlock _outputEventBlock;
+AUHostTransportStateBlock _transportStateBlock;
+AUScheduleMIDIEventBlock _scheduleMIDIEventBlock;
 
-@implementation AUv3ExtensionExampleExtensionAudioUnit {
-    // C++ members need to be ivars; they would be copied on access if they were properties.
-    AUv3ExtensionExampleExtensionDSPKernel _kernel;
-    std::unique_ptr<AUProcessHelper> _processHelper;
-}
+@implementation AUv3ExtensionExampleExtensionAudioUnit
 
 @synthesize parameterTree = _parameterTree;
 
@@ -39,15 +35,6 @@
     
     if (self == nil) { return nil; }
     
-    [self setupAudioBuses];
-    
-    return self;
-}
-
-#pragma mark - AUAudioUnit Setup
-
-- (void)setupAudioBuses {
-    // Create the output bus first
     AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2];
     _outputBus = [[AUAudioUnitBus alloc] initWithFormat:format error:nil];
     _outputBus.maximumChannelCount = 8;
@@ -56,51 +43,11 @@
     _outputBusArray = [[AUAudioUnitBusArray alloc] initWithAudioUnit:self
                                                              busType:AUAudioUnitBusTypeOutput
                                                               busses: @[_outputBus]];
-}
-
-- (void)setupParameterTree:(AUParameterTree *)parameterTree {
-    _parameterTree = parameterTree;
     
-    // Send the Parameter default values to the Kernel before setting up the parameter callbacks, so that the defaults set in the Kernel.hpp don't propagate back to the AUParameters via GetParameter
-    for (AUParameter *param in _parameterTree.allParameters) {
-        _kernel.setParameter(param.address, param.value);
-    }
-    
-    [self setupParameterCallbacks];
-}
-
-- (void)setupParameterCallbacks {
-    // Make a local pointer to the kernel to avoid capturing self.
-    
-    __block AUv3ExtensionExampleExtensionDSPKernel *kernel = &_kernel;
-    
-    // implementorValueObserver is called when a parameter changes value.
-    _parameterTree.implementorValueObserver = ^(AUParameter *param, AUValue value) {
-        kernel->setParameter(param.address, value);
-    };
-    
-    // implementorValueProvider is called when the value needs to be refreshed.
-    _parameterTree.implementorValueProvider = ^(AUParameter *param) {
-        return kernel->getParameter(param.address);
-    };
-    
-    // A function to provide string representations of parameter values.
-    _parameterTree.implementorStringFromValueCallback = ^(AUParameter *param, const AUValue *__nullable valuePtr) {
-        AUValue value = valuePtr == nil ? param.value : *valuePtr;
-        
-        return [NSString stringWithFormat:@"%.f", value];
-    };
+    return self;
 }
 
 #pragma mark - AUAudioUnit Overrides
-
-- (AUAudioFrameCount)maximumFramesToRender {
-    return _kernel.maximumFramesToRender();
-}
-
-- (void)setMaximumFramesToRender:(AUAudioFrameCount)maximumFramesToRender {
-    _kernel.setMaximumFramesToRender(maximumFramesToRender);
-}
 
 // If an audio unit has input, an audio unit's audio input connection points.
 // Subclassers must override this property getter and should return the same object every time.
@@ -116,34 +63,17 @@
     return _outputBusArray;
 }
 
-- (void)setShouldBypassEffect:(BOOL)shouldBypassEffect {
-    _kernel.setBypass(shouldBypassEffect);
-}
-
-- (BOOL)shouldBypassEffect {
-    return _kernel.isBypassed();
-}
-
 // Allocate resources required to render.
 // Subclassers should call the superclass implementation.
 - (BOOL)allocateRenderResourcesAndReturnError:(NSError **)outError {
     [super allocateRenderResourcesAndReturnError:outError];
     
-    // Set block on kernel..
-    _kernel.setMIDIOutputEventBlock(self.MIDIOutputEventListBlock);
-    _kernel.setMusicalContextBlock(self.musicalContextBlock);
-    _kernel.initialize(_outputBus.format.sampleRate);
-    _processHelper = std::make_unique<AUProcessHelper>(_kernel);
     return YES;
 }
 
 // Deallocate resources allocated in allocateRenderResourcesAndReturnError:
 // Subclassers should call the superclass implementation.
 - (void)deallocateRenderResources {
-    
-    // Deallocate your resources.
-    _kernel.deInitialize();
-    
     [super deallocateRenderResources];
 }
 
@@ -153,21 +83,16 @@
     return @[@"midiOut"];
 }
 
-- (MIDIProtocolID)AudioUnitMIDIProtocol {
-    return _kernel.AudioUnitMIDIProtocol();
-}
-
 #pragma mark - AUAudioUnit (AUAudioUnitImplementation)
 
-// Block which subclassers must provide to implement rendering.
 - (AUInternalRenderBlock)internalRenderBlock {
-    /*
-     Capture in locals to avoid ObjC member lookups. If "self" is captured in
-     render, we're doing it wrong.
-     */
-    // Specify captured objects are mutable.
-    __block AUv3ExtensionExampleExtensionDSPKernel *kernel = &_kernel;
-    __block std::unique_ptr<AUProcessHelper> &processHelper = _processHelper;
+    
+    // cache the musical context and MIDI output blocks provided by the host
+    __block AUHostMusicalContextBlock musicalContextBlock = self.musicalContextBlock;
+    __block AUMIDIOutputEventBlock midiOutputBlock = self.MIDIOutputEventBlock;
+    
+    // get the current sample rate from the output bus
+    __block double sampleRate = self.outputBus.format.sampleRate;
     
     return ^AUAudioUnitStatus(AudioUnitRenderActionFlags 				*actionFlags,
                               const AudioTimeStamp       				*timestamp,
@@ -177,17 +102,70 @@
                               const AURenderEvent        				*realtimeEventListHead,
                               AURenderPullInputBlock __unsafe_unretained pullInputBlock) {
         
-        if (frameCount > kernel->maximumFramesToRender()) {
-            return kAudioUnitErr_TooManyFramesToProcess;
+        // get the events from the sequencer buffer
+        MIDISequence sequence;
+        sequence.length = 2.;
+       
+        for (int i = 0; i < 8; i++) {
+            MIDIEvent ev;
+            ev.timestamp = (double)i * 0.25;
+            ev.status = NOTE_ON;
+            ev.data1 = 60;      // pitch
+            ev.data2 = 110;     // velocity
+            sequence.events[i] = ev;
         }
         
-        // TODO: potentially add some documentation text around rendering here?
+        sequence.eventCount = 8;
         
-        processHelper->processWithEvents(timestamp, frameCount, realtimeEventListHead);
-        
+        // get the tempo and beat position from the musical context provided by the host
+        double tempo;
+        double beatPosition;
+        musicalContextBlock(&tempo, NULL, NULL, &beatPosition, NULL, NULL);
+       
+        // the length of the sequencer loop in musical time (8.0 == 8 quarter notes)
+        double lengthInSamples = sequence.length / tempo * 60. * sampleRate;
+        double beatPositionInSamples = beatPosition / tempo * 60. * sampleRate;
+
+        // the sample time at the start of the buffer, as given by the render block,
+        // ...modulo the length of the sequencer loop
+        double bufferStartTime = fmod(beatPositionInSamples, lengthInSamples);
+        double bufferEndTime = bufferStartTime + frameCount;
+
+        for (int i = 0; i < sequence.eventCount; i++) {
+            // get the event timestamp, given in musical time (e.g., 1.25)
+            MIDIEvent event = sequence.events[i];
+            // convert the timestamp to sample time (e.g, 55125)
+            double eventTime = event.timestamp / tempo * 60. * sampleRate;
+            
+            bool eventIsInCurrentBuffer = eventTime >= bufferStartTime && eventTime < bufferEndTime;
+            // there is a loop transition in the current buffer
+            bool loopsAround = bufferEndTime > lengthInSamples && eventTime < fmod(bufferEndTime, lengthInSamples);
+            
+            // check if the event should occur within the current buffer OR there is a loop transition
+            if (eventIsInCurrentBuffer || loopsAround) {
+                // the difference between the sample time of the event
+                // and the beginning of the buffer gives us the offset, in samples
+                double offset = eventTime - bufferStartTime;
+                
+                if (loopsAround) {
+                    // in case of a loop transitition, add the remaining frames of the current buffer to the offset
+                    double remainingFramesInBuffer = lengthInSamples - bufferStartTime;
+                    offset = eventTime + remainingFramesInBuffer;
+                }
+               
+                // pass events to the MIDI output block provided by the host
+                AUEventSampleTime sampleTime = timestamp->mSampleTime + offset;
+                uint8_t cable = 0;
+                uint8_t midiData[] = { event.status, event.data1, event.data2 };
+                midiOutputBlock(sampleTime, cable, sizeof(midiData), midiData);
+            }
+        }
+       
         return noErr;
     };
-    
+}
+
+- (void)setupParameterTree:(AUParameterTree *)parameterTree {
 }
 
 @end
