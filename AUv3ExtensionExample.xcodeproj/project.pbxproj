@@ -109,19 +109,11 @@
 			children = (
 				975442F129D74AE900AA31F4 /* README.md */,
 				9754431B29D74AE900AA31F4 /* Info.plist */,
-				975442F329D74AE900AA31F4 /* Common */,
-			);
-			path = AUv3ExtensionExampleExtension;
-			sourceTree = "<group>";
-		};
-		975442F329D74AE900AA31F4 /* Common */ = {
-			isa = PBXGroup;
-			children = (
 				975442F429D74AE900AA31F4 /* AUv3ExtensionExampleExtension-Bridging-Header.h */,
 				975442FD29D74AE900AA31F4 /* Audio Unit */,
 				9754431229D74AE900AA31F4 /* UI */,
 			);
-			path = Common;
+			path = AUv3ExtensionExampleExtension;
 			sourceTree = "<group>";
 		};
 		975442FD29D74AE900AA31F4 /* Audio Unit */ = {
@@ -425,7 +417,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AUv3ExtensionExampleExtension/Common/AUv3ExtensionExampleExtension-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AUv3ExtensionExampleExtension/AUv3ExtensionExampleExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -453,7 +445,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AUv3ExtensionExampleExtension/Common/AUv3ExtensionExampleExtension-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AUv3ExtensionExampleExtension/AUv3ExtensionExampleExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
