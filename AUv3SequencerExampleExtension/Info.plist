@@ -10,13 +10,13 @@
 			<array>
 				<dict>
 					<key>description</key>
-					<string>AUv3ExtensionExampleExtension</string>
+					<string>AUv3SequencerExample</string>
 					<key>factoryFunction</key>
 					<string>$(PRODUCT_MODULE_NAME).AudioUnitViewController</string>
 					<key>manufacturer</key>
 					<string>cpio</string>
 					<key>name</key>
-					<string>cp3: AUv3ExtensionExampleExtension</string>
+					<string>cp3: AUv3SequencerExample</string>
 					<key>sandboxSafe</key>
 					<true/>
 					<key>subtype</key>

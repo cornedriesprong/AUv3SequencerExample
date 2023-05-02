@@ -1,17 +1,17 @@
 //
-//  AUv3ExtensionExampleExtensionAudioUnit.mm
-//  AUv3ExtensionExampleExtension
+//  AUv3SequencerExampleAudioUnit.mm
+//  AUv3SequencerExample
 //
 //  Created by Corné Driesprong on 31/03/2023.
 //
 
-#import "AUv3ExtensionExampleExtensionAudioUnit.h"
+#import "AUv3SequencerExampleAudioUnit.h"
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudioKit/AUViewController.h>
 #import <CoreMIDI/CoreMIDI.h>
 #import "TPCircularBuffer.h"
 
-@interface AUv3ExtensionExampleExtensionAudioUnit ()
+@interface AUv3SequencerExampleAudioUnit ()
 
 @property AUAudioUnitBusArray *inputBusArray;
 @property AUAudioUnitBusArray *outputBusArray;
@@ -21,7 +21,7 @@
 TPCircularBuffer fifoBuffer;
 MIDISequence sequence = {};
 
-@implementation AUv3ExtensionExampleExtensionAudioUnit
+@implementation AUv3SequencerExampleAudioUnit
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];

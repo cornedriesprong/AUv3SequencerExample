@@ -20,9 +20,9 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
     }
     
     public func createAudioUnit(with componentDescription: AudioComponentDescription) throws -> AUAudioUnit {
-        audioUnit = try AUv3ExtensionExampleExtensionAudioUnit(componentDescription: componentDescription, options: [])
+        audioUnit = try AUv3SequencerExampleAudioUnit(componentDescription: componentDescription, options: [])
         
-        guard let audioUnit = self.audioUnit as? AUv3ExtensionExampleExtensionAudioUnit else {
+        guard let audioUnit = self.audioUnit as? AUv3SequencerExampleAudioUnit else {
             log.error("Unable to create AUv3ExtensionExampleExtensionAudioUnit")
             return audioUnit!
         }

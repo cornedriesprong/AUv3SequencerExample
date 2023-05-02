@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  AUv3ExtensionExample
+//  AUv3SequencerExample
 //
 //  Created by Corné Driesprong on 31/03/2023.
 //

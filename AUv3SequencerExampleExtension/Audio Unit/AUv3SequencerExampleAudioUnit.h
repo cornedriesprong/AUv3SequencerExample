@@ -1,6 +1,6 @@
 //
-//  AUv3ExtensionExampleExtensionAudioUnit.h
-//  AUv3ExtensionExampleExtension
+//  AUv3SequencerExampleAudioUnit.h
+//  AUv3SequencerExample
 //
 //  Created by Corné Driesprong on 31/03/2023.
 //
@@ -33,7 +33,7 @@ struct SequenceOperation {
     MIDIEvent event;
 };
 
-@interface AUv3ExtensionExampleExtensionAudioUnit : AUAudioUnit
+@interface AUv3SequencerExampleAudioUnit : AUAudioUnit
 - (void)addEvent:(MIDIEvent)event;
 - (void)deleteEvent:(MIDIEvent)event;
 @end
