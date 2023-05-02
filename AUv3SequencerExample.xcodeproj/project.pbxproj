@@ -7,18 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9702C6122A019450000DDDC9 /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9702C60D2A01944F000DDDC9 /* TPCircularBuffer.c */; };
+		9702C6132A019450000DDDC9 /* TPCircularBuffer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9702C60E2A01944F000DDDC9 /* TPCircularBuffer.podspec */; };
+		9702C6142A019450000DDDC9 /* TPCircularBuffer+AudioBufferList.c in Sources */ = {isa = PBXBuildFile; fileRef = 9702C60F2A01944F000DDDC9 /* TPCircularBuffer+AudioBufferList.c */; };
+		9702C6182A019477000DDDC9 /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9702C6172A019477000DDDC9 /* AudioUnitViewController.swift */; };
+		9702C61C2A01948E000DDDC9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9702C61A2A01948E000DDDC9 /* MainInterface.storyboard */; };
+		973AAEE02A0194280077C44B /* AUv3SequencerExampleAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 973AAEDE2A0194280077C44B /* AUv3SequencerExampleAudioUnit.mm */; };
 		975442C929D74AE800AA31F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975442C829D74AE800AA31F4 /* ContentView.swift */; };
 		975442E129D74AE800AA31F4 /* AUv3SequencerExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975442E029D74AE800AA31F4 /* AUv3SequencerExampleApp.swift */; };
 		975442E329D74AE900AA31F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975442E229D74AE900AA31F4 /* Assets.xcassets */; };
 		975442ED29D74AE900AA31F4 /* AUv3SequencerExampleAudioUnit.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 975442EC29D74AE900AA31F4 /* AUv3SequencerExampleAudioUnit.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		97BEC0812A018C88002CB243 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 97BEC0802A018C87002CB243 /* README.md */; };
-		97BEC0842A018C95002CB243 /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BEC0832A018C95002CB243 /* AudioUnitViewController.swift */; };
-		97BEC08A2A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97BEC0882A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.mm */; };
-		97BEC0922A018CCD002CB243 /* TPCircularBuffer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 97BEC08C2A018CCD002CB243 /* TPCircularBuffer.podspec */; };
-		97BEC0932A018CCD002CB243 /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 97BEC08D2A018CCD002CB243 /* TPCircularBuffer.c */; };
-		97BEC0942A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.c in Sources */ = {isa = PBXBuildFile; fileRef = 97BEC08E2A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.c */; };
-		97BEC0952A018CCD002CB243 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 97BEC0902A018CCD002CB243 /* README.markdown */; };
-		97BEC09E2A0190B8002CB243 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97BEC09C2A0190B8002CB243 /* MainInterface.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,25 +44,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9702C60B2A01944F000DDDC9 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.markdown; sourceTree = "<group>"; };
+		9702C60C2A01944F000DDDC9 /* TPCircularBuffer+AudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TPCircularBuffer+AudioBufferList.h"; sourceTree = "<group>"; };
+		9702C60D2A01944F000DDDC9 /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
+		9702C60E2A01944F000DDDC9 /* TPCircularBuffer.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TPCircularBuffer.podspec; sourceTree = "<group>"; };
+		9702C60F2A01944F000DDDC9 /* TPCircularBuffer+AudioBufferList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "TPCircularBuffer+AudioBufferList.c"; sourceTree = "<group>"; };
+		9702C6102A01944F000DDDC9 /* TPCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCircularBuffer.h; sourceTree = "<group>"; };
+		9702C6172A019477000DDDC9 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
+		9702C61B2A01948E000DDDC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		973AAED92A0193CB0077C44B /* AUv3SequencerExampleExtension-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AUv3SequencerExampleExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		973AAEDA2A0193CB0077C44B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		973AAEDE2A0194280077C44B /* AUv3SequencerExampleAudioUnit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AUv3SequencerExampleAudioUnit.mm; sourceTree = "<group>"; };
+		973AAEDF2A0194280077C44B /* AUv3SequencerExampleAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AUv3SequencerExampleAudioUnit.h; sourceTree = "<group>"; };
 		975442C529D74AE800AA31F4 /* AUv3SequencerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AUv3SequencerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		975442C829D74AE800AA31F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		975442E029D74AE800AA31F4 /* AUv3SequencerExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AUv3SequencerExampleApp.swift; sourceTree = "<group>"; };
 		975442E229D74AE900AA31F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		975442E729D74AE900AA31F4 /* AUv3SequencerExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AUv3SequencerExample.entitlements; sourceTree = "<group>"; };
 		975442EC29D74AE900AA31F4 /* AUv3SequencerExampleAudioUnit.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AUv3SequencerExampleAudioUnit.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		97BEC07D2A018C7A002CB243 /* AUv3SequencerExampleExtension-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AUv3SequencerExampleExtension-Bridging-Header.h"; path = "AUv3SequencerExampleExtension/AUv3SequencerExampleExtension-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		97BEC0802A018C87002CB243 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = AUv3SequencerExampleExtension/README.md; sourceTree = SOURCE_ROOT; };
-		97BEC0832A018C95002CB243 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioUnitViewController.swift; path = AUv3SequencerExampleExtension/UI/AudioUnitViewController.swift; sourceTree = SOURCE_ROOT; };
-		97BEC0882A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AUv3SequencerExampleAudioUnit.mm; path = "AUv3SequencerExampleExtension/Audio Unit/AUv3SequencerExampleAudioUnit.mm"; sourceTree = SOURCE_ROOT; };
-		97BEC0892A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AUv3SequencerExampleAudioUnit.h; path = "AUv3SequencerExampleExtension/Audio Unit/AUv3SequencerExampleAudioUnit.h"; sourceTree = SOURCE_ROOT; };
-		97BEC08C2A018CCD002CB243 /* TPCircularBuffer.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; name = TPCircularBuffer.podspec; path = "AUv3SequencerExampleExtension/Audio Unit/TPCircularBuffer/TPCircularBuffer.podspec"; sourceTree = SOURCE_ROOT; };
-		97BEC08D2A018CCD002CB243 /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TPCircularBuffer.c; path = "AUv3SequencerExampleExtension/Audio Unit/TPCircularBuffer/TPCircularBuffer.c"; sourceTree = SOURCE_ROOT; };
-		97BEC08E2A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "TPCircularBuffer+AudioBufferList.c"; path = "AUv3SequencerExampleExtension/Audio Unit/TPCircularBuffer/TPCircularBuffer+AudioBufferList.c"; sourceTree = SOURCE_ROOT; };
-		97BEC08F2A018CCD002CB243 /* TPCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPCircularBuffer.h; path = "AUv3SequencerExampleExtension/Audio Unit/TPCircularBuffer/TPCircularBuffer.h"; sourceTree = SOURCE_ROOT; };
-		97BEC0902A018CCD002CB243 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.markdown; path = "AUv3SequencerExampleExtension/Audio Unit/TPCircularBuffer/README.markdown"; sourceTree = SOURCE_ROOT; };
-		97BEC0912A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TPCircularBuffer+AudioBufferList.h"; path = "AUv3SequencerExampleExtension/Audio Unit/TPCircularBuffer/TPCircularBuffer+AudioBufferList.h"; sourceTree = SOURCE_ROOT; };
-		97BEC0992A018DEB002CB243 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = AUv3SequencerExampleExtension/Info.plist; sourceTree = SOURCE_ROOT; };
-		97BEC09D2A0190B8002CB243 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = AUv3SequencerExampleExtension/UI/Base.lproj/MainInterface.storyboard; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +82,61 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9702C60A2A01943E000DDDC9 /* TPCircularBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				9702C60B2A01944F000DDDC9 /* README.markdown */,
+				9702C60D2A01944F000DDDC9 /* TPCircularBuffer.c */,
+				9702C6102A01944F000DDDC9 /* TPCircularBuffer.h */,
+				9702C60E2A01944F000DDDC9 /* TPCircularBuffer.podspec */,
+				9702C60F2A01944F000DDDC9 /* TPCircularBuffer+AudioBufferList.c */,
+				9702C60C2A01944F000DDDC9 /* TPCircularBuffer+AudioBufferList.h */,
+			);
+			path = TPCircularBuffer;
+			sourceTree = "<group>";
+		};
+		9702C6162A01946B000DDDC9 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				9702C6192A019481000DDDC9 /* Base.lproj */,
+				9702C6172A019477000DDDC9 /* AudioUnitViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		9702C6192A019481000DDDC9 /* Base.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				9702C61A2A01948E000DDDC9 /* MainInterface.storyboard */,
+			);
+			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		973AAED82A0193AF0077C44B /* AUv3SequencerExampleAudioUnit */ = {
+			isa = PBXGroup;
+			children = (
+				9702C6162A01946B000DDDC9 /* UI */,
+				973AAEDD2A0194150077C44B /* Audio Unit */,
+				973AAED92A0193CB0077C44B /* AUv3SequencerExampleExtension-Bridging-Header.h */,
+				973AAEDA2A0193CB0077C44B /* Info.plist */,
+			);
+			path = AUv3SequencerExampleAudioUnit;
+			sourceTree = "<group>";
+		};
+		973AAEDD2A0194150077C44B /* Audio Unit */ = {
+			isa = PBXGroup;
+			children = (
+				9702C60A2A01943E000DDDC9 /* TPCircularBuffer */,
+				973AAEDF2A0194280077C44B /* AUv3SequencerExampleAudioUnit.h */,
+				973AAEDE2A0194280077C44B /* AUv3SequencerExampleAudioUnit.mm */,
+			);
+			path = "Audio Unit";
+			sourceTree = "<group>";
+		};
 		975442BC29D74AE800AA31F4 = {
 			isa = PBXGroup;
 			children = (
-				97BEC07C2A018C40002CB243 /* AUv3SequencerExampleAudioUnit */,
+				973AAED82A0193AF0077C44B /* AUv3SequencerExampleAudioUnit */,
 				975442C729D74AE800AA31F4 /* AUv3SequencerExample */,
 				975442C629D74AE800AA31F4 /* Products */,
 			);
@@ -112,58 +160,6 @@
 				975442E729D74AE900AA31F4 /* AUv3SequencerExample.entitlements */,
 			);
 			path = AUv3SequencerExample;
-			sourceTree = "<group>";
-		};
-		97BEC07C2A018C40002CB243 /* AUv3SequencerExampleAudioUnit */ = {
-			isa = PBXGroup;
-			children = (
-				97BEC0872A018CA8002CB243 /* Audio Unit */,
-				97BEC0822A018C8D002CB243 /* UI */,
-				97BEC07D2A018C7A002CB243 /* AUv3SequencerExampleExtension-Bridging-Header.h */,
-				97BEC0802A018C87002CB243 /* README.md */,
-				97BEC0992A018DEB002CB243 /* Info.plist */,
-			);
-			path = AUv3SequencerExampleAudioUnit;
-			sourceTree = "<group>";
-		};
-		97BEC0822A018C8D002CB243 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				97BEC09B2A0190AC002CB243 /* Base.lproj */,
-				97BEC0832A018C95002CB243 /* AudioUnitViewController.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		97BEC0872A018CA8002CB243 /* Audio Unit */ = {
-			isa = PBXGroup;
-			children = (
-				97BEC08B2A018CC1002CB243 /* TPCircularBuffer */,
-				97BEC0892A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.h */,
-				97BEC0882A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.mm */,
-			);
-			path = "Audio Unit";
-			sourceTree = "<group>";
-		};
-		97BEC08B2A018CC1002CB243 /* TPCircularBuffer */ = {
-			isa = PBXGroup;
-			children = (
-				97BEC0902A018CCD002CB243 /* README.markdown */,
-				97BEC08D2A018CCD002CB243 /* TPCircularBuffer.c */,
-				97BEC08F2A018CCD002CB243 /* TPCircularBuffer.h */,
-				97BEC08C2A018CCD002CB243 /* TPCircularBuffer.podspec */,
-				97BEC08E2A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.c */,
-				97BEC0912A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.h */,
-			);
-			path = TPCircularBuffer;
-			sourceTree = "<group>";
-		};
-		97BEC09B2A0190AC002CB243 /* Base.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				97BEC09C2A0190B8002CB243 /* MainInterface.storyboard */,
-			);
-			path = Base.lproj;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,10 +251,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97BEC0812A018C88002CB243 /* README.md in Resources */,
-				97BEC09E2A0190B8002CB243 /* MainInterface.storyboard in Resources */,
-				97BEC0952A018CCD002CB243 /* README.markdown in Resources */,
-				97BEC0922A018CCD002CB243 /* TPCircularBuffer.podspec in Resources */,
+				9702C6132A019450000DDDC9 /* TPCircularBuffer.podspec in Resources */,
+				9702C61C2A01948E000DDDC9 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,10 +272,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97BEC0932A018CCD002CB243 /* TPCircularBuffer.c in Sources */,
-				97BEC0942A018CCD002CB243 /* TPCircularBuffer+AudioBufferList.c in Sources */,
-				97BEC08A2A018CB7002CB243 /* AUv3SequencerExampleAudioUnit.mm in Sources */,
-				97BEC0842A018C95002CB243 /* AudioUnitViewController.swift in Sources */,
+				9702C6122A019450000DDDC9 /* TPCircularBuffer.c in Sources */,
+				9702C6182A019477000DDDC9 /* AudioUnitViewController.swift in Sources */,
+				973AAEE02A0194280077C44B /* AUv3SequencerExampleAudioUnit.mm in Sources */,
+				9702C6142A019450000DDDC9 /* TPCircularBuffer+AudioBufferList.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,10 +290,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		97BEC09C2A0190B8002CB243 /* MainInterface.storyboard */ = {
+		9702C61A2A01948E000DDDC9 /* MainInterface.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				97BEC09D2A0190B8002CB243 /* Base */,
+				9702C61B2A01948E000DDDC9 /* Base */,
 			);
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
@@ -433,7 +427,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5GWBH83EBX;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AUv3SequencerExampleExtension/Info.plist;
+				INFOPLIST_FILE = AUv3SequencerExampleAudioUnit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AUv3SequencerExampleExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -446,7 +440,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AUv3SequencerExampleExtension/AUv3SequencerExampleExtension-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AUv3SequencerExampleAudioUnit/AUv3SequencerExampleExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -462,7 +456,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5GWBH83EBX;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AUv3SequencerExampleExtension/Info.plist;
+				INFOPLIST_FILE = AUv3SequencerExampleAudioUnit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AUv3SequencerExampleExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -475,7 +469,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "AUv3SequencerExampleExtension/AUv3SequencerExampleExtension-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "AUv3SequencerExampleAudioUnit/AUv3SequencerExampleExtension-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
