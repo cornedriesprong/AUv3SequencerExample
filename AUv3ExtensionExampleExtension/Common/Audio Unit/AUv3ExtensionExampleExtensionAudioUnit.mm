@@ -6,12 +6,9 @@
 //
 
 #import "AUv3ExtensionExampleExtensionAudioUnit.h"
-
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudioKit/AUViewController.h>
 #import <CoreMIDI/CoreMIDI.h>
-
-// Define parameter addresses.
 
 @interface AUv3ExtensionExampleExtensionAudioUnit ()
 
@@ -20,11 +17,6 @@
 @property AUAudioUnitBusArray *outputBusArray;
 @property (nonatomic, readonly) AUAudioUnitBus *outputBus;
 @end
-
-AUHostMusicalContextBlock _musicalContextBlock;
-AUMIDIOutputEventBlock _outputEventBlock;
-AUHostTransportStateBlock _transportStateBlock;
-AUScheduleMIDIEventBlock _scheduleMIDIEventBlock;
 
 @implementation AUv3ExtensionExampleExtensionAudioUnit
 
@@ -165,8 +157,4 @@ AUScheduleMIDIEventBlock _scheduleMIDIEventBlock;
     };
 }
 
-- (void)setupParameterTree:(AUParameterTree *)parameterTree {
-}
-
 @end
-
