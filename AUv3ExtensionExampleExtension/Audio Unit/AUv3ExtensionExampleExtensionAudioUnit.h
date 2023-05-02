@@ -11,20 +11,13 @@
 #define NOTE_ON             0x90
 #define NOTE_OFF            0x80
 #define MAX_EVENT_COUNT     256
-
-typedef struct SequencerSettings {
-    double tempo;
-    double sampleRate;
-    const UInt32 frameCount;
-} SequencerSettings;
+#define BUFFER_LENGTH       16384
 
 typedef struct MIDIEvent {
     double timestamp;
     uint8_t status;
     uint8_t data1;
     uint8_t data2;
-    double duration;
-    bool queued;
 } MIDIEvent;
 
 typedef struct MIDISequence {
@@ -33,6 +26,14 @@ typedef struct MIDISequence {
     struct MIDIEvent events[MAX_EVENT_COUNT];
 } MIDISequence;
 
+enum SequenceOperationType { Add, Delete };
+
+struct SequenceOperation {
+    enum SequenceOperationType type;
+    MIDIEvent event;
+};
+
 @interface AUv3ExtensionExampleExtensionAudioUnit : AUAudioUnit
-- (void)setupParameterTree:(AUParameterTree *)parameterTree;
+- (void)addEvent:(MIDIEvent)event;
+- (void)deleteEvent:(MIDIEvent)event;
 @end

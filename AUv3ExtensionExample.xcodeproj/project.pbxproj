@@ -15,6 +15,10 @@
 		9754430029D74AE900AA31F4 /* AUv3ExtensionExampleExtensionAudioUnit.mm in Sources */ = {isa = PBXBuildFile; fileRef = 975442FF29D74AE900AA31F4 /* AUv3ExtensionExampleExtensionAudioUnit.mm */; };
 		9754431629D74AE900AA31F4 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9754431429D74AE900AA31F4 /* MainInterface.storyboard */; };
 		9754431A29D74AE900AA31F4 /* AudioUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9754431929D74AE900AA31F4 /* AudioUnitViewController.swift */; };
+		97ACC5782A01777A001D565A /* TPCircularBuffer.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 97ACC5732A017779001D565A /* TPCircularBuffer.podspec */; };
+		97ACC5792A01777A001D565A /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 97ACC5742A017779001D565A /* TPCircularBuffer.c */; };
+		97ACC57A2A01777A001D565A /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 97ACC5762A01777A001D565A /* README.markdown */; };
+		97ACC57B2A01777A001D565A /* TPCircularBuffer+AudioBufferList.c in Sources */ = {isa = PBXBuildFile; fileRef = 97ACC5772A01777A001D565A /* TPCircularBuffer+AudioBufferList.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +59,12 @@
 		9754431529D74AE900AA31F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		9754431929D74AE900AA31F4 /* AudioUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioUnitViewController.swift; sourceTree = "<group>"; };
 		9754431B29D74AE900AA31F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97ACC5722A017779001D565A /* TPCircularBuffer+AudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TPCircularBuffer+AudioBufferList.h"; path = "AUv3ExtensionExampleExtension/Audio Unit/TPCircularBuffera/TPCircularBuffer+AudioBufferList.h"; sourceTree = SOURCE_ROOT; };
+		97ACC5732A017779001D565A /* TPCircularBuffer.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; name = TPCircularBuffer.podspec; path = "AUv3ExtensionExampleExtension/Audio Unit/TPCircularBuffera/TPCircularBuffer.podspec"; sourceTree = SOURCE_ROOT; };
+		97ACC5742A017779001D565A /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = TPCircularBuffer.c; path = "AUv3ExtensionExampleExtension/Audio Unit/TPCircularBuffera/TPCircularBuffer.c"; sourceTree = SOURCE_ROOT; };
+		97ACC5752A017779001D565A /* TPCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TPCircularBuffer.h; path = "AUv3ExtensionExampleExtension/Audio Unit/TPCircularBuffera/TPCircularBuffer.h"; sourceTree = SOURCE_ROOT; };
+		97ACC5762A01777A001D565A /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.markdown; path = "AUv3ExtensionExampleExtension/Audio Unit/TPCircularBuffera/README.markdown"; sourceTree = SOURCE_ROOT; };
+		97ACC5772A01777A001D565A /* TPCircularBuffer+AudioBufferList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "TPCircularBuffer+AudioBufferList.c"; path = "AUv3ExtensionExampleExtension/Audio Unit/TPCircularBuffera/TPCircularBuffer+AudioBufferList.c"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +129,7 @@
 		975442FD29D74AE900AA31F4 /* Audio Unit */ = {
 			isa = PBXGroup;
 			children = (
+				97ACC5712A017760001D565A /* TPCircularBuffer */,
 				975442FE29D74AE900AA31F4 /* AUv3ExtensionExampleExtensionAudioUnit.h */,
 				975442FF29D74AE900AA31F4 /* AUv3ExtensionExampleExtensionAudioUnit.mm */,
 			);
@@ -140,6 +151,19 @@
 				9754431429D74AE900AA31F4 /* MainInterface.storyboard */,
 			);
 			path = Base.lproj;
+			sourceTree = "<group>";
+		};
+		97ACC5712A017760001D565A /* TPCircularBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				97ACC5762A01777A001D565A /* README.markdown */,
+				97ACC5742A017779001D565A /* TPCircularBuffer.c */,
+				97ACC5752A017779001D565A /* TPCircularBuffer.h */,
+				97ACC5732A017779001D565A /* TPCircularBuffer.podspec */,
+				97ACC5772A01777A001D565A /* TPCircularBuffer+AudioBufferList.c */,
+				97ACC5722A017779001D565A /* TPCircularBuffer+AudioBufferList.h */,
+			);
+			path = TPCircularBuffer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,7 +256,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9754431629D74AE900AA31F4 /* MainInterface.storyboard in Resources */,
+				97ACC57A2A01777A001D565A /* README.markdown in Resources */,
 				975442F229D74AE900AA31F4 /* README.md in Resources */,
+				97ACC5782A01777A001D565A /* TPCircularBuffer.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +278,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97ACC5792A01777A001D565A /* TPCircularBuffer.c in Sources */,
+				97ACC57B2A01777A001D565A /* TPCircularBuffer+AudioBufferList.c in Sources */,
 				9754430029D74AE900AA31F4 /* AUv3ExtensionExampleExtensionAudioUnit.mm in Sources */,
 				9754431A29D74AE900AA31F4 /* AudioUnitViewController.swift in Sources */,
 			);

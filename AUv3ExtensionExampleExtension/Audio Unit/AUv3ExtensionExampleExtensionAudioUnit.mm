@@ -9,24 +9,34 @@
 #import <AVFoundation/AVFoundation.h>
 #import <CoreAudioKit/AUViewController.h>
 #import <CoreMIDI/CoreMIDI.h>
+#import "TPCircularBuffer.h"
 
 @interface AUv3ExtensionExampleExtensionAudioUnit ()
 
-@property (nonatomic, readwrite) AUParameterTree *parameterTree;
 @property AUAudioUnitBusArray *inputBusArray;
 @property AUAudioUnitBusArray *outputBusArray;
 @property (nonatomic, readonly) AUAudioUnitBus *outputBus;
 @end
 
-@implementation AUv3ExtensionExampleExtensionAudioUnit
+TPCircularBuffer fifoBuffer;
+MIDISequence sequence = {};
 
-@synthesize parameterTree = _parameterTree;
+@implementation AUv3ExtensionExampleExtensionAudioUnit
 
 - (instancetype)initWithComponentDescription:(AudioComponentDescription)componentDescription options:(AudioComponentInstantiationOptions)options error:(NSError **)outError {
     self = [super initWithComponentDescription:componentDescription options:options error:outError];
     
     if (self == nil) { return nil; }
-    
+   
+    // initialize FIFO buffer
+    TPCircularBufferInit(&fifoBuffer, BUFFER_LENGTH);
+   
+    // initialize sequence
+    sequence = {};
+    sequence.eventCount = 0;
+    sequence.length = 4;
+   
+    // initialize output bus
     AVAudioFormat *format = [[AVAudioFormat alloc] initStandardFormatWithSampleRate:44100 channels:2];
     _outputBus = [[AUAudioUnitBus alloc] initWithFormat:format error:nil];
     _outputBus.maximumChannelCount = 8;
@@ -69,6 +79,26 @@
     [super deallocateRenderResources];
 }
 
+# pragma mark - Add/remove events
+
+- (void)addEvent:(MIDIEvent)event {
+    
+    uint32_t availableBytes = 0;
+    SequenceOperation *head = (SequenceOperation *)TPCircularBufferHead(&fifoBuffer, &availableBytes);
+    SequenceOperation op = { Add, event };
+    head = &op;
+    TPCircularBufferProduceBytes(&fifoBuffer, head, sizeof(SequenceOperation));
+}
+
+- (void)deleteEvent:(MIDIEvent)event {
+    
+    uint32_t availableBytes = 0;
+    SequenceOperation *head = (SequenceOperation *)TPCircularBufferHead(&fifoBuffer, &availableBytes);
+    SequenceOperation op = { Delete, event };
+    head = &op;
+    TPCircularBufferProduceBytes(&fifoBuffer, head, sizeof(SequenceOperation));
+}
+
 #pragma mark - MIDI
 
 - (NSArray<NSString *>*) MIDIOutputNames {
@@ -80,6 +110,7 @@
 - (AUInternalRenderBlock)internalRenderBlock {
     
     // cache the musical context and MIDI output blocks provided by the host
+//    __block TPCircularBuffer buffer = self->_fifoBuffer;
     __block AUHostMusicalContextBlock musicalContextBlock = self.musicalContextBlock;
     __block AUMIDIOutputEventBlock midiOutputBlock = self.MIDIOutputEventBlock;
     
@@ -94,20 +125,33 @@
                               const AURenderEvent        				*realtimeEventListHead,
                               AURenderPullInputBlock __unsafe_unretained pullInputBlock) {
         
-        // get the events from the sequencer buffer
-        MIDISequence sequence;
-        sequence.length = 2.;
-       
-        for (int i = 0; i < 8; i++) {
-            MIDIEvent ev;
-            ev.timestamp = (double)i * 0.25;
-            ev.status = NOTE_ON;
-            ev.data1 = 60;      // pitch
-            ev.data2 = 110;     // velocity
-            sequence.events[i] = ev;
+        // move MIDI events from FIFO buffer to internal sequencer buffer
+        uint32_t bytes = -1;
+        while (bytes != 0) {
+            SequenceOperation *op = (SequenceOperation *)TPCircularBufferTail(&fifoBuffer, &bytes);
+            if (op) {
+                switch (op->type) {
+                    case Add: {
+                        sequence.events[sequence.eventCount] = op->event;
+                        sequence.eventCount++;
+                        TPCircularBufferConsume(&fifoBuffer, sizeof(SequenceOperation));
+                        break;
+                    }
+                    case Delete: {
+                        for (int i = 0; i < sequence.eventCount; i++) {
+                            if (sequence.events[i].timestamp == op->event.timestamp) {
+                                for (int j = i; j < sequence.eventCount; j++) {
+                                    sequence.events[j] = sequence.events[j + 1];
+                                }
+                                sequence.eventCount--;
+                                TPCircularBufferConsume(&fifoBuffer, sizeof(SequenceOperation));
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
         }
-        
-        sequence.eventCount = 8;
         
         // get the tempo and beat position from the musical context provided by the host
         double tempo;

@@ -8,7 +8,6 @@
 import Combine
 import CoreAudioKit
 import os
-import SwiftUI
 
 private let log = Logger(subsystem: "cp3.io.AUv3ExtensionExampleExtension", category: "AudioUnitViewController")
 
@@ -27,6 +26,21 @@ public class AudioUnitViewController: AUViewController, AUAudioUnitFactory {
             log.error("Unable to create AUv3ExtensionExampleExtensionAudioUnit")
             return audioUnit!
         }
+     
+        // schedule a note on/off event
+        let noteOn = MIDIEvent(
+            timestamp: 0,
+            status: 0x90,
+            data1: 60,
+            data2: 100)
+        audioUnit.add(noteOn)
+        
+        let noteOff = MIDIEvent(
+            timestamp: 0.25,
+            status: 0x80,
+            data1: 60,
+            data2: 0)
+        audioUnit.add(noteOff)
         
         return audioUnit
     }
